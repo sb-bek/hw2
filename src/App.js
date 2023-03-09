@@ -1,10 +1,14 @@
 import "./App.css";
 import Input from "./components/Input";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import TodoList from "./components/TodoList";
 
 function App() {
   const [list, setList] = useState([]);
+
+  useEffect(()=>{
+    localStorage.setItem("todos", JSON.stringify(list));
+  },[list])
 
   const addTodo = (todo) => {
     const newList = [...list, { ...todo, id: Date.now() }];
